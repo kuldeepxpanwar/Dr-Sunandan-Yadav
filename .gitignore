@@ -9,6 +9,8 @@ asset-contact-sheet.jpg
 *.png
 *.jpg
 *.jpeg
+/*.webp
+!/public/*.webp
 
 # Vercel local project metadata
 .vercel/
@@ -16,3 +18,4 @@ asset-contact-sheet.jpg
 # Common OS/editor noise
 Thumbs.db
 .DS_Store
+node_modules

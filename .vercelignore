@@ -1,6 +1,8 @@
 *.png
 *.jpg
 *.jpeg
+/*.webp
+!/public/*.webp
 desktop-screenshot.png
 mobile-screenshot.png
 reviews-desktop-screenshot.png
