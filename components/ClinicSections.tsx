@@ -263,7 +263,7 @@ export function TreatmentsSection() {
                 </div>
                 <div className="p-8 md:p-12 flex flex-col justify-center">
                   <h3 className="text-3xl font-black text-white">{treatmentTabs[activeTab].title}</h3>
-                  <p className="mt-5 text-lg leading-8 text-white/72">
+                  <p className="mt-5 text-lg leading-8 text-slate-300">
                     {treatmentTabs[activeTab].description}
                   </p>
                   <div className="mt-8 grid gap-4">
