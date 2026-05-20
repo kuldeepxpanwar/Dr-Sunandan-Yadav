@@ -134,11 +134,11 @@ export function ServicesSection() {
           title="Focused urology care with modern procedure pathways."
           copy="From kidney stone emergencies to long-term prostate and men's health concerns, each service is designed around diagnosis, treatment clarity, and faster recovery."
         />
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 scrollbar-hide md:grid md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => (
             <article
               key={service.title}
-              className={`rounded-3xl border border-slate-100 bg-white p-7 shadow-xl shadow-slate-900/5 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_40px_rgba(6,182,212,0.15)] ${service.className || ""}`}
+              className={`rounded-3xl border border-slate-100 bg-white p-7 shadow-xl shadow-slate-900/5 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_40px_rgba(6,182,212,0.15)] min-w-[85vw] md:min-w-0 snap-center shrink-0 ${service.className || ""}`}
             >
               <div className="mb-8 grid h-12 w-12 place-items-center rounded-2xl bg-cyan-50 text-lg font-black text-[#00B4D8]">
                 {String(index + 1).padStart(2, "0")}
@@ -229,12 +229,12 @@ export function TreatmentsSection() {
           title="Procedure clarity before the patient enters the OT."
         />
         <div className="mt-12 grid gap-8 lg:grid-cols-[320px_1fr] items-start">
-          <div className="flex flex-col gap-3">
+          <div className="flex overflow-x-auto whitespace-nowrap scrollbar-hide gap-3 pb-4 w-full md:flex-col md:whitespace-normal md:pb-0">
             {treatmentTabs.map((tab, idx) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(idx)}
-                className={`text-left p-6 rounded-3xl transition-all duration-300 border-2 ${activeTab === idx ? "border-[#00B4D8] bg-white shadow-xl shadow-cyan-900/5" : "border-transparent hover:bg-white hover:shadow-md"}`}
+                className={`text-left p-6 rounded-3xl transition-all duration-300 border-2 shrink-0 snap-center min-w-[240px] md:min-w-0 ${activeTab === idx ? "border-[#00B4D8] bg-white shadow-xl shadow-cyan-900/5" : "border-transparent hover:bg-white hover:shadow-md"}`}
               >
                 <h4 className={`text-xl font-black ${activeTab === idx ? "text-[#0A2540]" : "text-slate-500"}`}>{tab.title}</h4>
                 <span className={`text-sm mt-1 block ${activeTab === idx ? "text-[#00B4D8]" : "text-slate-400"}`}>{tab.subtitle}</span>
@@ -292,9 +292,9 @@ export function AwarenessSection() {
           label="Awareness hub"
           title="Useful reading for patients before and after consultation."
         />
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 scrollbar-hide md:grid md:grid-cols-3">
           {awareness.map((post) => (
-            <article key={post.title} className="overflow-hidden rounded-3xl bg-white shadow-xl shadow-slate-900/6">
+            <article key={post.title} className="overflow-hidden rounded-3xl bg-white shadow-xl shadow-slate-900/6 min-w-[85vw] md:min-w-0 snap-center shrink-0">
               <Image
                 src={post.image}
                 alt={post.title}
@@ -354,6 +354,8 @@ export function AppointmentSection() {
 }
 
 export function ContactSection() {
+  const [mapInteractive, setMapInteractive] = useState(false);
+
   return (
     <section id="contact" className="bg-[#F8F9FA] px-6 py-24">
       <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-[0.85fr_1fr]">
@@ -373,7 +375,16 @@ export function ContactSection() {
             </a>
           </div>
         </div>
-        <div className="overflow-hidden rounded-3xl shadow-xl shadow-slate-900/10 min-h-[320px]">
+        <div 
+          className="relative overflow-hidden rounded-3xl shadow-xl shadow-slate-900/10 min-h-[320px] group"
+          onClick={() => setMapInteractive(true)}
+          onMouseLeave={() => setMapInteractive(false)}
+        >
+          {!mapInteractive && (
+            <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/5 md:hidden">
+              <span className="rounded-full bg-white/90 px-4 py-2 text-sm font-bold shadow-lg backdrop-blur">Tap to interact</span>
+            </div>
+          )}
           <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.841551466085!2d75.8118029!3d26.8131375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396dc982705cc75f%3A0xe54e195724225381!2sDr.%20Sunandan%20Yadav!5e0!3m2!1sen!2sin!4v1716210000000!5m2!1sen!2sin" 
             width="100%" 
@@ -382,7 +393,7 @@ export function ContactSection() {
             allowFullScreen={false} 
             loading="lazy" 
             referrerPolicy="no-referrer-when-downgrade"
-            className="grayscale-[40%] contrast-125 hover:grayscale-0 transition-all duration-700"
+            className={`h-full w-full grayscale-[40%] contrast-125 transition-all duration-700 hover:grayscale-0 ${!mapInteractive ? 'pointer-events-none md:pointer-events-auto' : ''}`}
           ></iframe>
         </div>
       </div>

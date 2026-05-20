@@ -67,9 +67,9 @@ export default function HeroSection() {
           </motion.div>
 
           {/* Bottom Badges */}
-          <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
+          <motion.div variants={itemVariants} className="flex overflow-x-auto snap-x scrollbar-hide gap-3 pb-2 w-full md:flex-wrap md:pb-0">
             {['9+ years experience', '5000+ surgeries', 'Advanced minimally invasive urology'].map((text, i) => (
-              <span key={i} className="px-4 py-2 bg-white text-xs font-semibold text-[#0A2540] rounded-md border border-gray-100 shadow-sm">
+              <span key={i} className="px-4 py-2 bg-white text-xs font-semibold text-[#0A2540] rounded-md border border-gray-100 shadow-sm shrink-0 snap-center">
                 {text}
               </span>
             ))}
@@ -99,7 +99,7 @@ export default function HeroSection() {
           {/* Floating Card 1 (Top Left) */}
           <motion.div 
             animate={floatingAnimation}
-            className="absolute top-10 md:top-20 -left-4 md:-left-12 bg-white/90 backdrop-blur-md border border-white/40 p-4 rounded-xl shadow-2xl z-20"
+            className="absolute top-10 md:top-20 -left-4 md:-left-12 bg-white/90 backdrop-blur-md border border-white/40 p-4 rounded-xl shadow-2xl z-20 hidden md:block"
           >
             <p className="text-[#0A2540] font-bold text-sm md:text-base">MCh Urology</p>
             <p className="text-gray-500 text-xs mt-1">Govt Medical College Kota</p>
