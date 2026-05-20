@@ -138,7 +138,7 @@ export function ServicesSection() {
           {services.map((service, index) => (
             <article
               key={service.title}
-              className={`rounded-3xl border border-slate-100 bg-white p-7 shadow-xl shadow-slate-900/5 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_40px_rgba(6,182,212,0.15)] min-w-[85vw] md:min-w-0 snap-center shrink-0 ${service.className || ""}`}
+              className={`rounded-3xl border border-slate-100 bg-white p-7 shadow-xl shadow-slate-900/5 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_40px_rgba(6,182,212,0.15)] w-[85vw] md:w-full snap-center shrink-0 ${service.className || ""}`}
             >
               <div className="mb-8 grid h-12 w-12 place-items-center rounded-2xl bg-cyan-50 text-lg font-black text-[#00B4D8]">
                 {String(index + 1).padStart(2, "0")}
@@ -294,13 +294,13 @@ export function AwarenessSection() {
         />
         <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 scrollbar-hide md:grid md:grid-cols-3">
           {awareness.map((post) => (
-            <article key={post.title} className="overflow-hidden rounded-3xl bg-white shadow-xl shadow-slate-900/6 min-w-[85vw] md:min-w-0 snap-center shrink-0">
+            <article key={post.title} className="overflow-hidden rounded-3xl bg-white shadow-xl shadow-slate-900/6 w-[85vw] md:w-full snap-center shrink-0">
               <Image
                 src={post.image}
                 alt={post.title}
                 width={1300}
                 height={1300}
-                className="aspect-[1.25] object-cover"
+                className="w-full h-56 md:h-auto md:aspect-[1.25] object-cover"
               />
               <div className="p-6">
                 <h3 className="text-xl font-black text-[#0A2540]">{post.title}</h3>

@@ -67,7 +67,7 @@ export default function HeroSection() {
           </motion.div>
 
           {/* Bottom Badges */}
-          <motion.div variants={itemVariants} className="flex overflow-x-auto snap-x scrollbar-hide gap-3 pb-2 w-full md:flex-wrap md:pb-0">
+          <motion.div variants={itemVariants} className="flex overflow-x-auto whitespace-nowrap snap-x scrollbar-hide gap-3 pb-2 w-full md:flex-wrap md:whitespace-normal md:pb-0">
             {['9+ years experience', '5000+ surgeries', 'Advanced minimally invasive urology'].map((text, i) => (
               <span key={i} className="px-4 py-2 bg-white text-xs font-semibold text-[#0A2540] rounded-md border border-gray-100 shadow-sm shrink-0 snap-center">
                 {text}
