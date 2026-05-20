@@ -1,12 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
-import {
-  motion,
-  useAnimationFrame,
-  useMotionValue,
-  useReducedMotion,
-} from "framer-motion";
+import { useRef } from "react";
 
 type Review = {
   name: string;
@@ -70,27 +64,10 @@ function StarIcon() {
   );
 }
 
-function ReviewCard({
-  review,
-  onPause,
-  onResume,
-}: {
-  review: Review;
-  onPause: () => void;
-  onResume: () => void;
-}) {
+function ReviewCard({ review }: { review: Review }) {
   return (
-    <motion.article
-      onHoverStart={onPause}
-      onHoverEnd={onResume}
-      whileHover={{
-        animationPlayState: "paused",
-        y: -8,
-        scale: 1.03,
-        boxShadow: "0 30px 80px rgba(15, 23, 42, 0.16)",
-      }}
-      transition={{ type: "spring", stiffness: 260, damping: 24 }}
-      className="w-[350px] shrink-0 rounded-3xl border border-gray-100 bg-white p-8 shadow-xl shadow-slate-900/10 md:w-[400px]"
+    <article
+      className="w-[350px] shrink-0 rounded-3xl border border-gray-100 bg-white p-8 shadow-xl shadow-slate-900/10 transition-all duration-300 hover:-translate-y-2 hover:scale-[1.03] hover:shadow-[0_30px_80px_rgba(15,23,42,0.16)] md:w-[400px]"
     >
       <div className="mb-5 flex items-center gap-3">
         <div className="grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-[#0A2540] to-[#00B4D8] text-sm font-black text-white">
@@ -113,29 +90,12 @@ function ReviewCard({
       <p className="line-clamp-4 text-[15px] leading-7 text-gray-600">
         {review.text}
       </p>
-    </motion.article>
+    </article>
   );
 }
 
 export function ReviewsMarquee() {
-  const trackRef = useRef<HTMLDivElement | null>(null);
-  const x = useMotionValue(0);
-  const reduceMotion = useReducedMotion();
-  const [isPaused, setIsPaused] = useState(false);
-  const velocityRef = useRef(36);
-  const loopedReviews = useMemo(() => [...reviews, ...reviews, ...reviews], []);
-
-  useAnimationFrame((_, delta) => {
-    if (reduceMotion || !trackRef.current) return;
-
-    const targetVelocity = isPaused ? 0 : 36;
-    velocityRef.current += (targetVelocity - velocityRef.current) * 0.08;
-
-    const loopWidth = trackRef.current.scrollWidth / 3;
-    const nextX = x.get() - (velocityRef.current * delta) / 1000;
-
-    x.set(Math.abs(nextX) >= loopWidth ? nextX + loopWidth : nextX);
-  });
+  const loopedReviews = [...reviews, ...reviews];
 
   return (
     <section id="stories" className="overflow-hidden bg-[#F8F9FA] py-24">
@@ -148,21 +108,12 @@ export function ReviewsMarquee() {
         </h2>
       </div>
 
-      <div className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-        <motion.div
-          ref={trackRef}
-          className="flex w-max gap-6 px-6 md:gap-8"
-          style={{ x, animationPlayState: isPaused ? "paused" : "running" }}
-        >
+      <div className="group flex w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+        <div className="flex w-max animate-marquee gap-6 px-6 group-hover:[animation-play-state:paused] md:gap-8">
           {loopedReviews.map((review, index) => (
-            <ReviewCard
-              key={`${review.name}-${index}`}
-              review={review}
-              onPause={() => setIsPaused(true)}
-              onResume={() => setIsPaused(false)}
-            />
+            <ReviewCard key={`${review.name}-${index}`} review={review} />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

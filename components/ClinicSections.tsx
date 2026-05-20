@@ -1,9 +1,12 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
-
+import { motion, AnimatePresence } from "framer-motion";
 const services = [
   {
     title: "Kidney Stone Treatment",
     copy: "Laser lithotripsy, URS, PCNL and RIRS pathways for stone pain, obstruction and recurrence prevention.",
+    className: "md:col-span-2 lg:col-span-2",
   },
   {
     title: "Prostate Problems",
@@ -24,6 +27,7 @@ const services = [
   {
     title: "Pediatric Urology",
     copy: "Care for urinary and genital concerns in children with family-sensitive explanations and follow-up.",
+    className: "md:col-span-2 lg:col-span-3",
   },
 ];
 
@@ -134,7 +138,7 @@ export function ServicesSection() {
           {services.map((service, index) => (
             <article
               key={service.title}
-              className="rounded-3xl border border-slate-100 bg-white p-7 shadow-xl shadow-slate-900/5 transition hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-900/10"
+              className={`rounded-3xl border border-slate-100 bg-white p-7 shadow-xl shadow-slate-900/5 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_40px_rgba(6,182,212,0.15)] ${service.className || ""}`}
             >
               <div className="mb-8 grid h-12 w-12 place-items-center rounded-2xl bg-cyan-50 text-lg font-black text-[#00B4D8]">
                 {String(index + 1).padStart(2, "0")}
@@ -187,34 +191,92 @@ export function AboutSection() {
   );
 }
 
+const treatmentTabs = [
+  {
+    id: "laser",
+    title: "Laser Lithotripsy & RIRS",
+    subtitle: "Advanced stone removal",
+    image: "/laparoscopic-surgery-ot.webp",
+    description: "Patients are guided through symptoms, scans, treatment choices, expected recovery and follow-up prevention so care feels less uncertain.",
+    features: ["No external cuts", "Faster recovery", "Same-day discharge"]
+  },
+  {
+    id: "laparoscopy",
+    title: "Laparoscopic Uro-Oncology",
+    subtitle: "Precision cancer surgery",
+    image: "/kidney-anatomy.webp",
+    description: "Minimally invasive keyhole procedures for kidney and bladder tumors, maximizing oncological safety while minimizing post-operative pain and hospital stay.",
+    features: ["High precision", "Minimal blood loss", "Oncological safety"]
+  },
+  {
+    id: "prostate",
+    title: "Prostate Laser Surgery",
+    subtitle: "Enlarged prostate care",
+    image: "/prostate-care-doctor.webp",
+    description: "State-of-the-art laser treatments like HoLEP and ThuLEP for enlarged prostate (BPH), offering immediate relief from urinary symptoms.",
+    features: ["Catheter-free quickly", "Preserves continence", "Safe for cardiac patients"]
+  }
+];
+
 export function TreatmentsSection() {
+  const [activeTab, setActiveTab] = useState(0);
+
   return (
-    <section id="treatments" className="px-6 py-24">
+    <section id="treatments" className="px-6 py-24 bg-slate-50">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           label="Treatment pathways"
           title="Procedure clarity before the patient enters the OT."
         />
-        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <Image
-            src="/laparoscopic-surgery-ot.webp"
-            alt="Laparoscopic urology procedure"
-            width={1448}
-            height={818}
-            className="h-full min-h-[360px] rounded-3xl object-cover shadow-2xl shadow-slate-900/12"
-          />
-          <div className="rounded-3xl bg-[#0A2540] p-8 text-white">
-            <h3 className="text-3xl font-black">Laser and minimally invasive treatment options</h3>
-            <p className="mt-5 text-lg leading-8 text-white/72">
-              Patients are guided through symptoms, scans, treatment choices, expected recovery and follow-up prevention so care feels less uncertain.
-            </p>
-            <div className="mt-8 grid gap-4 sm:grid-cols-3">
-              {["Technology-led planning", "Recovery-focused surgery", "Transparent follow-up"].map((item) => (
-                <div key={item} className="rounded-2xl border border-white/10 bg-white/10 p-4 text-sm font-bold backdrop-blur">
-                  {item}
+        <div className="mt-12 grid gap-8 lg:grid-cols-[320px_1fr] items-start">
+          <div className="flex flex-col gap-3">
+            {treatmentTabs.map((tab, idx) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(idx)}
+                className={`text-left p-6 rounded-3xl transition-all duration-300 border-2 ${activeTab === idx ? "border-[#00B4D8] bg-white shadow-xl shadow-cyan-900/5" : "border-transparent hover:bg-white hover:shadow-md"}`}
+              >
+                <h4 className={`text-xl font-black ${activeTab === idx ? "text-[#0A2540]" : "text-slate-500"}`}>{tab.title}</h4>
+                <span className={`text-sm mt-1 block ${activeTab === idx ? "text-[#00B4D8]" : "text-slate-400"}`}>{tab.subtitle}</span>
+              </button>
+            ))}
+          </div>
+          
+          <div className="relative overflow-hidden rounded-3xl bg-[#0A2540] shadow-2xl shadow-slate-900/20 min-h-[500px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="grid md:grid-cols-2 h-full"
+              >
+                <div className="relative h-64 md:h-full">
+                  <Image
+                    src={treatmentTabs[activeTab].image}
+                    alt={treatmentTabs[activeTab].title}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A2540] via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-[#0A2540]" />
                 </div>
-              ))}
-            </div>
+                <div className="p-8 md:p-12 flex flex-col justify-center">
+                  <h3 className="text-3xl font-black text-white">{treatmentTabs[activeTab].title}</h3>
+                  <p className="mt-5 text-lg leading-8 text-white/72">
+                    {treatmentTabs[activeTab].description}
+                  </p>
+                  <div className="mt-8 grid gap-4">
+                    {treatmentTabs[activeTab].features.map((item) => (
+                      <div key={item} className="flex items-center gap-3 text-sm font-bold text-white/90">
+                        <div className="h-2 w-2 rounded-full bg-[#00B4D8]" />
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>
@@ -293,7 +355,7 @@ export function AppointmentSection() {
 
 export function ContactSection() {
   return (
-    <section id="contact" className="px-6 py-24">
+    <section id="contact" className="bg-[#F8F9FA] px-6 py-24">
       <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-[0.85fr_1fr]">
         <div className="rounded-3xl border border-slate-100 bg-white p-8 shadow-xl shadow-slate-900/5">
           <h2 className="text-4xl font-black text-[#0A2540]">Clinic location</h2>
@@ -303,7 +365,7 @@ export function ContactSection() {
             Infront of, 22-A-18, 22-A-11, Haldighati Marg, Sector 22, NRI Colony, Pratap Nagar, Jaipur, Rajasthan 302033
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href="https://www.instagram.com/drsunandan_urologist?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" className="rounded-2xl bg-[#00B4D8] px-5 py-3 font-extrabold text-white">
+            <a href="https://www.instagram.com/drsunandan_urologist" className="rounded-2xl bg-[#00B4D8] px-5 py-3 font-extrabold text-white">
               Instagram
             </a>
             <a href="https://www.facebook.com/sunandan.yadav/" className="rounded-2xl bg-[#0A2540] px-5 py-3 font-extrabold text-white">
@@ -311,11 +373,17 @@ export function ContactSection() {
             </a>
           </div>
         </div>
-        <div className="grid min-h-[320px] place-items-center rounded-3xl bg-gradient-to-br from-[#0A2540] to-[#00B4D8] p-8 text-center text-white shadow-2xl">
-          <div>
-            <span className="block text-6xl font-black md:text-8xl">Jaipur</span>
-            <strong className="mt-4 block text-lg">Haldighati Marg · Sector 22 · NRI Colony · Pratap Nagar</strong>
-          </div>
+        <div className="overflow-hidden rounded-3xl shadow-xl shadow-slate-900/10 min-h-[320px]">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.841551466085!2d75.8118029!3d26.8131375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396dc982705cc75f%3A0xe54e195724225381!2sDr.%20Sunandan%20Yadav!5e0!3m2!1sen!2sin!4v1716210000000!5m2!1sen!2sin" 
+            width="100%" 
+            height="100%" 
+            style={{ border: 0 }} 
+            allowFullScreen={false} 
+            loading="lazy" 
+            referrerPolicy="no-referrer-when-downgrade"
+            className="grayscale-[40%] contrast-125 hover:grayscale-0 transition-all duration-700"
+          ></iframe>
         </div>
       </div>
     </section>
