@@ -1,169 +1,117 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import type { MouseEvent, ReactNode } from "react";
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 
-const headingWords = ["Dr.", "Sunandan", "Yadav"];
+export default function HeroSection() {
+  // Framer Motion variants for staggered text reveal
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2, delayChildren: 0.1 },
+    },
+  };
 
-function MagneticButton({
-  children,
-  href,
-  variant = "primary",
-}: {
-  children: ReactNode;
-  href: string;
-  variant?: "primary" | "secondary";
-}) {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { stiffness: 180, damping: 18, mass: 0.25 });
-  const springY = useSpring(mouseY, { stiffness: 180, damping: 18, mass: 0.25 });
-  const x = useTransform(springX, [-0.5, 0.5], [-7, 7]);
-  const y = useTransform(springY, [-0.5, 0.5], [-5, 5]);
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+  };
 
-  function handleMouseMove(event: MouseEvent<HTMLAnchorElement>) {
-    const rect = event.currentTarget.getBoundingClientRect();
-    mouseX.set((event.clientX - rect.left) / rect.width - 0.5);
-    mouseY.set((event.clientY - rect.top) / rect.height - 0.5);
-  }
-
-  function resetMouse() {
-    mouseX.set(0);
-    mouseY.set(0);
-  }
+  // Floating animation for the glass cards
+  const floatingAnimation = {
+    y: [0, -15, 0],
+    transition: {
+      duration: 4,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  };
 
   return (
-    <motion.a
-      href={href}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={resetMouse}
-      style={{ x, y }}
-      whileHover={{ scale: 1.04 }}
-      whileTap={{ scale: 0.98 }}
-      className={[
-        "inline-flex h-14 items-center justify-center rounded-2xl px-7 text-sm font-extrabold transition-shadow",
-        variant === "primary"
-          ? "bg-[#00B4D8] text-white shadow-[0_20px_50px_rgba(0,180,216,0.32)] hover:shadow-[0_26px_70px_rgba(0,180,216,0.46)]"
-          : "border border-white/20 bg-white/10 text-white backdrop-blur-md hover:bg-white/15",
-      ].join(" ")}
-    >
-      {children}
-    </motion.a>
-  );
-}
+    <section className="relative w-full min-h-[90vh] bg-[#F8FAFC] flex items-center overflow-hidden">
+      {/* Background subtle grid/pattern (Optional, adds premium feel) */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
-export function HeroSection() {
-  return (
-    <section className="relative isolate min-h-screen overflow-hidden bg-[#0A2540] text-white">
-      <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_72%_25%,rgba(0,180,216,0.28),transparent_32%),linear-gradient(135deg,#061827_0%,#0A2540_48%,#06263D_100%)]" />
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] bg-[size:42px_42px] [mask-image:linear-gradient(to_bottom,black,transparent_86%)]" />
-
-      <div className="mx-auto grid min-h-screen max-w-7xl grid-cols-1 items-center gap-12 px-6 py-28 md:grid-cols-[0.95fr_1.05fr] lg:px-10">
-        <div className="relative z-10">
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-5 text-sm font-extrabold uppercase tracking-[0.16em] text-[#00B4D8]"
-          >
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 flex flex-col-reverse md:flex-row items-center justify-between gap-12 w-full">
+        
+        {/* LEFT COLUMN: Text Content */}
+        <motion.div 
+          className="w-full md:w-1/2 flex flex-col items-start"
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+        >
+          <motion.p variants={itemVariants} className="text-cyan-500 font-bold tracking-widest uppercase text-sm mb-4">
             Consultations in Jaipur
           </motion.p>
-
-          <motion.h1
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: {},
-              visible: {
-                transition: {
-                  staggerChildren: 0.11,
-                  delayChildren: 0.16,
-                },
-              },
-            }}
-            className="max-w-4xl text-6xl font-black tracking-tighter text-white md:text-8xl"
-          >
-            {headingWords.map((word) => (
-              <motion.span
-                key={word}
-                variants={{
-                  hidden: { opacity: 0, y: 44, filter: "blur(10px)" },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    filter: "blur(0px)",
-                    transition: { duration: 0.78, ease: [0.22, 1, 0.36, 1] },
-                  },
-                }}
-                className="block leading-[0.92]"
-              >
-                {word}
-              </motion.span>
-            ))}
+          
+          <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-extrabold text-[#0A2540] leading-tight mb-6 tracking-tight">
+            Dr. Sunandan <br /> Yadav
           </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.62, duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-8 max-w-2xl text-lg leading-8 text-white/72 md:text-xl"
-          >
+          
+          <motion.p variants={itemVariants} className="text-lg md:text-xl text-gray-600 mb-8 max-w-lg leading-relaxed">
             MCh Urology | Consultant Urologist & Andrologist | Advanced minimally invasive care for urinary and men&apos;s health.
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.84, duration: 0.6 }}
-            className="mt-10 flex flex-col gap-4 sm:flex-row"
-          >
-            <MagneticButton href="#appointment">Book Appointment</MagneticButton>
-            <MagneticButton href="#stories" variant="secondary">
+          <motion.div variants={itemVariants} className="flex flex-wrap gap-4 mb-10">
+            <button className="px-8 py-3 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold rounded-lg shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 hover:-translate-y-1">
+              Book Appointment
+            </button>
+            <button className="px-8 py-3 bg-white text-[#0A2540] font-semibold rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
               Read Reviews
-            </MagneticButton>
-          </motion.div>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: 28 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ delay: 0.32, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto w-full max-w-[620px]"
-        >
-          <div className="absolute -inset-8 -z-10 rounded-[3.5rem] bg-[#00B4D8]/20 blur-3xl" />
-          <div className="relative overflow-hidden rounded-[3rem] border border-white/10 bg-white/10 shadow-[0_40px_140px_rgba(0,0,0,0.38)] backdrop-blur">
-            <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#0A2540]/88 via-transparent to-white/10" />
-            <Image
-              src="/dr-sunandan-hero.webp"
-              alt="Dr. Sunandan Yadav in a white coat"
-              width={1410}
-              height={1116}
-              priority
-              className="aspect-[0.9] w-full object-cover object-center"
-            />
-          </div>
-
-          <motion.div
-            animate={{ y: [-10, 10, -10] }}
-            transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute left-0 top-[18%] rounded-2xl border border-white/20 bg-white/10 p-5 shadow-2xl backdrop-blur-md md:-left-8"
-          >
-            <p className="text-base font-extrabold text-white">MCh Urology</p>
-            <p className="mt-1 text-sm text-white/68">Govt Medical College Kota</p>
+            </button>
           </motion.div>
 
-          <motion.div
-            animate={{ y: [10, -10, 10] }}
-            transition={{ duration: 6.4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute bottom-[13%] right-0 rounded-2xl border border-white/20 bg-white/10 p-5 shadow-2xl backdrop-blur-md md:-right-10"
-          >
-            <p className="text-base font-extrabold text-white">Advanced Care</p>
-            <p className="mt-1 max-w-[190px] text-sm text-white/68">
-              Laser, laparoscopy and robotic techniques
-            </p>
+          {/* Bottom Badges */}
+          <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
+            {['9+ years experience', '5000+ surgeries', 'Advanced minimally invasive urology'].map((text, i) => (
+              <span key={i} className="px-4 py-2 bg-white text-xs font-semibold text-[#0A2540] rounded-md border border-gray-100 shadow-sm">
+                {text}
+              </span>
+            ))}
           </motion.div>
         </motion.div>
+
+        {/* RIGHT COLUMN: Image & Floating Cards */}
+        <div className="w-full md:w-1/2 relative flex justify-center mt-10 md:mt-0">
+          
+          {/* Main Image Container */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="relative w-[300px] md:w-[450px] aspect-[4/5] rounded-t-[200px] overflow-hidden bg-gradient-to-b from-[#E0F2FE] to-transparent"
+          >
+            {/* Make sure 'dr-sunandan-hero.webp' is in your public folder */}
+            <Image 
+              src="/dr-sunandan-hero.webp" 
+              alt="Dr. Sunandan Yadav"
+              fill
+              className="object-cover object-top"
+              priority
+            />
+          </motion.div>
+
+          {/* Floating Card 1 (Top Left) */}
+          <motion.div 
+            animate={floatingAnimation}
+            className="absolute top-10 md:top-20 -left-4 md:-left-12 bg-white/90 backdrop-blur-md border border-white/40 p-4 rounded-xl shadow-2xl z-20"
+          >
+            <p className="text-[#0A2540] font-bold text-sm md:text-base">MCh Urology</p>
+            <p className="text-gray-500 text-xs mt-1">Govt Medical College Kota</p>
+          </motion.div>
+
+          {/* Floating Card 2 (Bottom Right) */}
+          <motion.div 
+            animate={{ ...floatingAnimation, transition: { ...floatingAnimation.transition, delay: 1.5 } }} // Delayed so they don't bounce together
+            className="absolute bottom-10 md:bottom-20 -right-4 md:-right-10 bg-white/90 backdrop-blur-md border border-white/40 p-4 rounded-xl shadow-2xl z-20"
+          >
+            <p className="text-[#0A2540] font-bold text-sm md:text-base">Advanced Care</p>
+            <p className="text-gray-500 text-xs mt-1 max-w-[150px]">Laser, laparoscopy & robotic techniques</p>
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );
