@@ -1,0 +1,9 @@
+*.png
+*.jpg
+*.jpeg
+desktop-screenshot.png
+mobile-screenshot.png
+reviews-desktop-screenshot.png
+reviews-mobile-screenshot.png
+asset-contact-sheet.jpg
+PatientReviewsMarquee.tsx

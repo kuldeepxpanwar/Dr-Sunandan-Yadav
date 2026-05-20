@@ -1,0 +1,18 @@
+# Local/generated verification artifacts
+desktop-screenshot.png
+mobile-screenshot.png
+reviews-desktop-screenshot.png
+reviews-mobile-screenshot.png
+asset-contact-sheet.jpg
+
+# Original heavy source images kept locally; deployed site uses optimized .webp files
+*.png
+*.jpg
+*.jpeg
+
+# Vercel local project metadata
+.vercel/
+
+# Common OS/editor noise
+Thumbs.db
+.DS_Store
