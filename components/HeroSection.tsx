@@ -1,11 +1,14 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import Image from 'next/image';
+
+const smoothEase = [0.22, 1, 0.36, 1] as const;
+const floatingEase = [0.45, 0, 0.55, 1] as const;
 
 export default function HeroSection() {
   // Framer Motion variants for staggered text reveal
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
@@ -13,9 +16,9 @@ export default function HeroSection() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: smoothEase } },
   };
 
   // Floating animation for the glass cards
@@ -24,7 +27,7 @@ export default function HeroSection() {
     transition: {
       duration: 4,
       repeat: Infinity,
-      ease: "easeInOut",
+      ease: floatingEase,
     },
   };
 
@@ -80,7 +83,7 @@ export default function HeroSection() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            transition={{ duration: 1, ease: smoothEase }}
             className="relative w-[300px] md:w-[450px] aspect-[4/5] rounded-t-[200px] overflow-hidden bg-gradient-to-b from-[#E0F2FE] to-transparent"
           >
             {/* Make sure 'dr-sunandan-hero.webp' is in your public folder */}
