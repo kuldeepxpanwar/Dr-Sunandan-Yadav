@@ -1905,6 +1905,13 @@ select {
     padding-right: 16px;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  
+  .hero-proof > span {
+    flex-shrink: 0;
+    scroll-snap-align: start;
   }
   
   .hero-proof::-webkit-scrollbar {
