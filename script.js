@@ -167,3 +167,25 @@ form?.addEventListener("submit", (event) => {
     select.querySelectorAll("[role='option']").forEach((option) => option.removeAttribute("aria-selected"));
   });
 });
+
+const devTrigger = document.querySelector("[data-dev-trigger]");
+const devModal = document.querySelector("[data-dev-modal]");
+const devOverlay = document.querySelector("[data-dev-overlay]");
+const devCloseBtn = document.querySelector("[data-dev-close]");
+
+const toggleDevModal = (show) => {
+  if (!devModal || !devOverlay) return;
+  if (show) {
+    devModal.classList.add("open");
+    devOverlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+  } else {
+    devModal.classList.remove("open");
+    devOverlay.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+};
+
+devTrigger?.addEventListener("click", () => toggleDevModal(true));
+devCloseBtn?.addEventListener("click", () => toggleDevModal(false));
+devOverlay?.addEventListener("click", () => toggleDevModal(false));
