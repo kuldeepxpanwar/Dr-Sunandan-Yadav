@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd dr-sunandan-yadav && npm install && npm run build",
+  "buildCommand": "cd dr-sunandan-yadav && npm run build",
   "outputDirectory": "dr-sunandan-yadav/.next",
   "installCommand": "cd dr-sunandan-yadav && npm install",
   "framework": "nextjs"
