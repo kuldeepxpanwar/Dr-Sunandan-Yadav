@@ -40,12 +40,19 @@ const treatmentContent = {
   },
 };
 
-const setHeaderState = () => {
+const heroImage = document.querySelector(".hero-media img");
+
+const handleScroll = () => {
   header?.classList.toggle("scrolled", window.scrollY > 16);
+  
+  if (heroImage) {
+    // Subtle parallax effect matching the reference video feel
+    heroImage.style.transform = `translateY(${window.scrollY * 0.18}px)`;
+  }
 };
 
-setHeaderState();
-window.addEventListener("scroll", setHeaderState, { passive: true });
+handleScroll();
+window.addEventListener("scroll", handleScroll, { passive: true });
 
 menuButton?.addEventListener("click", () => {
   const isOpen = mobileMenu.classList.toggle("open");
