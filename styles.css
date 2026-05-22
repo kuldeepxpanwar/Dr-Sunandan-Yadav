@@ -1127,7 +1127,7 @@ select {
   color: var(--ink);
 }
 
-.appointment-form label,
+.appointment-form > label,
 .form-field {
   display: grid;
   gap: 8px;
@@ -1146,6 +1146,56 @@ select {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--light);
+}
+
+.form-floating {
+  position: relative;
+}
+
+.form-floating input {
+  padding: 24px 14px 8px !important;
+  font-weight: 600;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-floating input:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.1);
+}
+
+.form-floating label {
+  position: absolute;
+  left: 15px;
+  top: 16px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.form-floating input:focus ~ label,
+.form-floating input:not(:placeholder-shown) ~ label {
+  top: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--cyan);
+}
+
+.valid-tick {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  width: 20px;
+  height: 20px;
+  color: var(--green);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.form-floating input:valid:not(:placeholder-shown) ~ .valid-tick {
+  transform: translateY(-50%) scale(1);
 }
 
 .appointment-form input:focus,

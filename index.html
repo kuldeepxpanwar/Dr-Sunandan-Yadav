@@ -419,14 +419,16 @@
           </div>
         </div>
         <form class="appointment-form reveal" data-form>
-          <label>
-            Full name
-            <input type="text" name="name" placeholder="Patient name" required />
-          </label>
-          <label>
-            Phone number
-            <input type="tel" name="phone" placeholder="+91" required />
-          </label>
+          <div class="form-floating">
+            <input type="text" name="name" id="patientName" placeholder=" " minlength="2" required />
+            <label for="patientName">Full name</label>
+            <svg class="valid-tick" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div class="form-floating">
+            <input type="tel" name="phone" id="patientPhone" placeholder=" " pattern="^[\+]?[0-9\s\-]{10,14}$" required />
+            <label for="patientPhone">Phone number (10 digits)</label>
+            <svg class="valid-tick" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
           <div class="form-field">
             <span>Concern</span>
             <div class="custom-select" data-custom-select>
