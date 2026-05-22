@@ -432,7 +432,7 @@ select {
 
 .service-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 18px;
 }
 
@@ -463,8 +463,14 @@ select {
   box-shadow: 0 28px 60px rgba(10, 61, 98, 0.14);
 }
 
-/* Bento Grid: First service card takes 2 columns */
+/* Bento Grid: First and Last service cards take 2 columns */
 .service-grid .service-card:first-child {
+  grid-column: span 2;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e8f7fc 100%);
+  border-color: rgba(0, 180, 216, 0.2);
+}
+
+.service-grid .service-card:last-child {
   grid-column: span 2;
   background: linear-gradient(135deg, #f0f9ff 0%, #e8f7fc 100%);
   border-color: rgba(0, 180, 216, 0.2);
@@ -1442,6 +1448,11 @@ select {
 
   .whatsapp-float {
     display: none;
+  }
+
+  .service-grid .service-card:first-child,
+  .service-grid .service-card:last-child {
+    grid-column: span 1;
   }
 
   .mobile-booking-bar {
