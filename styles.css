@@ -156,6 +156,17 @@ select {
   box-shadow: 0 20px 40px rgba(0, 180, 216, 0.36);
 }
 
+.nav-cta:active,
+.button:active,
+.treatment-tab:active,
+.mobile-booking-bar a:active,
+.trust-item:active,
+.service-card:active {
+  transform: scale(0.96) !important;
+  box-shadow: none !important;
+  transition-duration: 0.1s !important;
+}
+
 .menu-button {
   display: none;
   width: 44px;
@@ -408,10 +419,20 @@ select {
 .section-heading h2,
 .profile-copy h2,
 .why-copy h2,
-.appointment-copy h2,
 .contact-card h2 {
   margin: 0;
+  background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy) 60%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   color: var(--navy);
+  font-size: clamp(32px, 4.4vw, 54px);
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.appointment-copy h2 {
+  margin: 0;
+  color: var(--white);
   font-size: clamp(32px, 4.4vw, 54px);
   line-height: 1.05;
   letter-spacing: 0;
@@ -446,7 +467,7 @@ select {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--white);
-  box-shadow: 0 12px 28px rgba(10, 61, 98, 0.05);
+  box-shadow: 0 16px 32px rgba(0, 180, 216, 0.04), 0 4px 10px rgba(10, 61, 98, 0.03);
 }
 
 .service-card {
