@@ -581,23 +581,54 @@ select {
 
 .timeline {
   display: grid;
-  gap: 12px;
+  gap: 16px;
   margin-top: 28px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  bottom: 20px;
+  left: 6px;
+  width: 2px;
+  background-image: linear-gradient(to bottom, var(--cyan) 50%, transparent 50%);
+  background-size: 2px 10px;
+  z-index: 0;
+  opacity: 0.5;
 }
 
 .timeline div {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 78px 1fr;
   gap: 16px;
   align-items: start;
   padding: 18px;
-  border-left: 3px solid var(--cyan);
   border-radius: var(--radius);
   background: var(--white);
+  box-shadow: 0 4px 16px rgba(10, 61, 98, 0.05);
   /* Initial state for staggered animation */
   opacity: 0;
   transform: translateX(-20px);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.timeline div::before {
+  content: "";
+  position: absolute;
+  top: 26px;
+  left: -20px;
+  width: 10px;
+  height: 10px;
+  background: var(--cyan);
+  border: 3px solid var(--white);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.2);
+  z-index: 2;
 }
 
 /* Trigger staggered animation when parent is revealed */
@@ -1474,12 +1505,30 @@ select {
   }
 
   .blog-grid,
-  .clinical-grid,
   .why-grid,
   .treatment-layout,
-  .treatment-detail,
-  .site-footer {
+  .treatment-detail {
     grid-template-columns: 1fr;
+  }
+
+  .clinical-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    margin-inline: -16px;
+    padding-inline: 16px;
+    padding-bottom: 24px;
+    scrollbar-width: none;
+  }
+
+  .clinical-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .clinical-grid .clinical-card {
+    flex: 0 0 85%;
+    scroll-snap-align: center;
   }
 
   .trust-bar {
@@ -1527,6 +1576,31 @@ select {
     grid-template-columns: 1fr;
   }
 
+  .treatment-tabs {
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin-inline: -16px;
+    padding-inline: 16px;
+    padding-bottom: 16px;
+    gap: 12px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .treatment-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .treatment-tabs button {
+    flex: 0 0 auto;
+    width: auto;
+    scroll-snap-align: start;
+    padding: 14px 24px;
+    border-radius: 50px;
+    white-space: nowrap;
+  }
+
   .section,
   .appointment-section,
   .contact-section {
@@ -1552,7 +1626,8 @@ select {
   }
 
   .site-footer {
-    padding-bottom: 88px;
+    grid-template-columns: 1fr;
+    padding-bottom: 120px;
   }
 
   .footer-note {
