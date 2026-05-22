@@ -219,3 +219,50 @@ const countObserver = new IntersectionObserver(
 countUpElements.forEach((el) => {
   countObserver.observe(el);
 });
+
+// WhatsApp Booking Integration
+if (form) {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const name = formData.get("name");
+    const phone = formData.get("phone");
+    const concern = formData.get("concern") || "General Consultation";
+    const location = formData.get("location") || "Pratap Nagar clinic";
+    
+    const message = `Hello Dr. Sunandan Yadav's Clinic,
+    
+I would like to request an appointment.
+*Patient Name:* ${name}
+*Phone:* ${phone}
+*Concern:* ${concern}
+*Preferred Location:* ${location}
+
+Please let me know the available time slots.`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappNumber = "919001712499";
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+    
+    window.open(whatsappUrl, "_blank");
+    
+    const submitBtn = form.querySelector("button[type='submit']");
+    if (submitBtn) {
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = "Redirecting to WhatsApp...";
+      submitBtn.style.backgroundColor = "#25D366";
+      submitBtn.style.borderColor = "#25D366";
+      
+      setTimeout(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.style.backgroundColor = "";
+        submitBtn.style.borderColor = "";
+        form.reset();
+        const customSelectBtn = form.querySelector("[data-custom-select] button");
+        if (customSelectBtn) {
+          customSelectBtn.textContent = "Select concern";
+        }
+      }, 3000);
+    }
+  });
+}
