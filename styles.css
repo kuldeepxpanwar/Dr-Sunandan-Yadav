@@ -418,13 +418,24 @@ select {
 
 .section-heading h2,
 .profile-copy h2,
-.why-copy h2,
 .contact-card h2 {
   margin: 0;
   background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy) 60%, var(--cyan) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   color: var(--navy);
+  font-size: clamp(32px, 4.4vw, 54px);
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.why-copy h2,
+.appointment-copy h2 {
+  margin: 0;
+  background: linear-gradient(135deg, var(--white) 0%, rgba(255, 255, 255, 0.85) 60%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--white);
   font-size: clamp(32px, 4.4vw, 54px);
   line-height: 1.05;
   letter-spacing: 0;
@@ -1051,8 +1062,19 @@ select {
 
 .blog-card img {
   width: 100%;
-  aspect-ratio: 1.38;
+  height: 240px;
   object-fit: cover;
+  object-position: top center;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  background: var(--light);
+}
+
+.blog-card:hover img,
+.blog-card:active img {
+  height: 480px;
+  object-fit: contain;
+  transform: scale(1.02);
 }
 
 .blog-card div {
