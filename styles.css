@@ -1901,14 +1901,15 @@ select {
     scroll-snap-type: x mandatory;
     gap: 10px;
     padding-bottom: 12px;
-    margin-right: -16px;
-    padding-right: 16px;
-    scrollbar-width: none;
     -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
-    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%);
-    mask-image: linear-gradient(to right, #000 85%, transparent 100%);
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-left: 20px;
+    padding-right: 20px;
   }
   
   .hero-proof > span {
@@ -1958,8 +1959,6 @@ select {
     padding-bottom: 24px;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
-    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%);
-    mask-image: linear-gradient(to right, #000 85%, transparent 100%);
   }
 
   .clinical-grid::-webkit-scrollbar {
@@ -2002,8 +2001,6 @@ select {
     padding-bottom: 30px;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
-    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%);
-    mask-image: linear-gradient(to right, #000 85%, transparent 100%);
   }
   
   .service-grid::-webkit-scrollbar {
@@ -2025,14 +2022,11 @@ select {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     margin-inline: -16px;
-    padding-inline: 16px;
     padding-bottom: 16px;
     gap: 12px;
     scrollbar-width: none;
     -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
-    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%);
-    mask-image: linear-gradient(to right, #000 85%, transparent 100%);
   }
   
   .treatment-list::-webkit-scrollbar {
