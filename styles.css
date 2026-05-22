@@ -1244,66 +1244,91 @@ select {
 
 .contact-section {
   display: grid;
-  grid-template-columns: 0.78fr 1fr;
+  grid-template-columns: 1fr;
+  max-width: 800px;
+  margin: 0 auto;
   gap: 18px;
   padding: clamp(70px, 8vw, 104px) clamp(18px, 6vw, 86px);
   background: var(--white);
 }
 
 .contact-card {
-  padding: 30px;
+  padding: clamp(24px, 5vw, 40px);
+  text-align: center;
 }
 
 .contact-card a {
   color: var(--navy);
   font-weight: 800;
+  transition: color 0.3s ease;
+}
+
+.contact-card a:hover {
+  color: var(--cyan);
+}
+
+.location-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--muted) !important;
+  font-weight: 500 !important;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.location-link:hover {
+  color: var(--navy) !important;
+  text-decoration: underline;
+}
+
+.phone-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 18px;
 }
 
 .social-links {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.social-btn {
+  display: inline-flex;
+  align-items: center;
   gap: 10px;
-  margin-top: 18px;
-}
-
-.social-links a {
-  padding: 10px 14px;
-  color: var(--white);
-  border-radius: var(--radius);
+  padding: 14px 28px !important;
+  color: var(--white) !important;
+  border-radius: 50px !important;
+  font-weight: 700 !important;
   background: var(--navy);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease !important;
 }
 
-.social-links a:first-child {
-  background: var(--cyan);
+.social-btn svg {
+  width: 20px;
+  height: 20px;
 }
 
-.map-card {
-  display: grid;
-  min-height: 300px;
-  place-items: center;
-  padding: 30px;
-  color: var(--white);
-  text-align: center;
-  background:
-    linear-gradient(rgba(10, 61, 98, 0.82), rgba(10, 61, 98, 0.82)),
-    radial-gradient(circle at 30% 30%, var(--cyan), transparent 22%),
-    linear-gradient(135deg, #0a3d62, #00b4d8);
+.social-btn.instagram {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  box-shadow: 0 10px 20px rgba(220, 39, 67, 0.2);
 }
 
-.map-card span,
-.map-card strong {
-  display: block;
+.social-btn.facebook {
+  background: #1877f2;
+  box-shadow: 0 10px 20px rgba(24, 119, 242, 0.2);
 }
 
-.map-card span {
-  font-size: clamp(42px, 7vw, 82px);
-  font-weight: 800;
-  line-height: 1;
+.social-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(10, 61, 98, 0.15) !important;
 }
 
-.map-card strong {
-  max-width: 520px;
-  font-size: 18px;
+.social-btn:active {
+  transform: scale(0.96) !important;
 }
 
 .site-footer {
