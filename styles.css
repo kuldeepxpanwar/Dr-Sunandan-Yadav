@@ -1576,7 +1576,8 @@ select {
     grid-template-columns: 1fr;
   }
 
-  .treatment-tabs {
+  .treatment-list {
+    display: flex;
     flex-direction: row;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -1588,11 +1589,11 @@ select {
     -ms-overflow-style: none;
   }
   
-  .treatment-tabs::-webkit-scrollbar {
+  .treatment-list::-webkit-scrollbar {
     display: none;
   }
   
-  .treatment-tabs button {
+  .treatment-tab {
     flex: 0 0 auto;
     width: auto;
     scroll-snap-align: start;
