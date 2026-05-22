@@ -1046,6 +1046,29 @@ select {
   background: #effdf7;
 }
 
+.video-section {
+  background: var(--white);
+}
+
+.podcast-card {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-bottom: 56.25%;
+  border-radius: var(--radius);
+  box-shadow: 0 16px 32px rgba(10, 61, 98, 0.08);
+  border: 1px solid var(--line);
+  background: var(--light);
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.podcast-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px rgba(0, 180, 216, 0.15);
+}
+
 .blog-section {
   background: var(--light);
 }
