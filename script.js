@@ -149,24 +149,7 @@ treatmentTabs.forEach((tab) => {
   });
 });
 
-form?.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const data = new FormData(form);
-  if (!data.get("concern")) {
-    formNote.textContent = "Please select a concern before requesting an appointment.";
-    formNote.classList.add("error");
-    return;
-  }
-  const patientName = data.get("name") || "Patient";
-  formNote.classList.remove("error");
-  formNote.textContent = `Thank you, ${patientName}. Your appointment request is ready for clinic follow-up.`;
-  form.reset();
-  customSelects.forEach((select) => {
-    select.querySelector("input").value = "";
-    select.querySelector("button").textContent = "Select concern";
-    select.querySelectorAll("[role='option']").forEach((option) => option.removeAttribute("aria-selected"));
-  });
-});
+
 
 const devTrigger = document.querySelector("[data-dev-trigger]");
 const devModal = document.querySelector("[data-dev-modal]");
@@ -225,6 +208,20 @@ if (form) {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const formData = new FormData(form);
+    
+    if (!formData.get("concern")) {
+      if (formNote) {
+        formNote.textContent = "Please select a concern before requesting an appointment.";
+        formNote.classList.add("error");
+      }
+      return;
+    }
+    
+    if (formNote) {
+      formNote.classList.remove("error");
+      formNote.textContent = "Details are used only for consultation coordination.";
+    }
+
     const name = formData.get("name");
     const phone = formData.get("phone");
     const concern = formData.get("concern") || "General Consultation";
