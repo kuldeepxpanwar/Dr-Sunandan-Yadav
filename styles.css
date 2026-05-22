@@ -1704,20 +1704,117 @@ select {
   color: #cbd5e1;
 }
 
-.whatsapp-float {
+/* --- FAB Speed Dial Menu (Desktop Only) --- */
+.fab-container {
   position: fixed;
   z-index: 55;
-  right: 22px;
+  right: 24px;
   bottom: 24px;
-  display: grid;
-  width: 58px;
-  height: 58px;
-  place-items: center;
-  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.fab-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding-bottom: 4px;
+}
+
+.fab-container:hover .fab-actions {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.fab-action {
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
+  background: var(--white);
+  color: var(--blue-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  transition: transform 0.2s, color 0.2s;
+  position: relative;
+  text-decoration: none;
+  margin-right: 6px; /* Align with center of main fab icon */
+}
+
+.fab-action:hover {
+  transform: scale(1.1);
+  color: var(--primary);
+}
+
+.fab-main {
+  display: flex;
+  align-items: center;
   background: var(--green);
+  color: var(--white);
+  border-radius: 30px;
+  padding: 0 6px;
+  height: 56px;
   box-shadow: 0 18px 34px rgba(16, 185, 129, 0.34);
-  font-weight: 900;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.fab-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.fab-dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  border: 2px solid var(--green);
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.fab-text {
+  font-weight: 700;
+  font-size: 15px;
+  white-space: nowrap;
+  max-width: 0;
+  opacity: 0;
+  transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease-in-out, padding 0.3s ease;
+  padding-right: 0;
+}
+
+.fab-container:hover .fab-main {
+  padding: 0 20px 0 6px;
+}
+
+.fab-container:hover .fab-text {
+  max-width: 150px;
+  opacity: 1;
+  padding-left: 8px;
 }
 
 .mobile-booking-bar {
@@ -2060,7 +2157,7 @@ select {
     min-height: 310px;
   }
 
-  .whatsapp-float {
+  .fab-container {
     display: none;
   }
 
