@@ -1718,13 +1718,19 @@ select {
 }
 
 .mobile-booking-bar a {
-  display: grid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
   min-height: 48px;
-  place-items: center;
   color: var(--white);
   background: var(--navy);
   font-weight: 900;
   border-radius: 50px;
+}
+
+.mobile-booking-bar a.btn-whatsapp {
+  background: #25d366;
 }
 
 .mobile-booking-bar a + a {
