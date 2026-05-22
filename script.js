@@ -241,7 +241,7 @@ I would like to request an appointment.
 Please let me know the available time slots.`;
 
     const encodedMessage = encodeURIComponent(message);
-    const whatsappNumber = "919001712499";
+    const whatsappNumber = "919001700762";
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
     
     window.open(whatsappUrl, "_blank");
