@@ -1283,23 +1283,29 @@ select {
 .mobile-booking-bar {
   position: fixed;
   z-index: 54;
-  right: 12px;
-  bottom: 12px;
-  left: 12px;
+  right: 16px;
+  bottom: 16px;
+  left: 16px;
   display: none;
   grid-template-columns: 0.8fr 1fr;
-  overflow: hidden;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  gap: 8px;
+  padding: 6px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
 }
 
 .mobile-booking-bar a {
   display: grid;
-  min-height: 52px;
+  min-height: 48px;
   place-items: center;
   color: var(--white);
   background: var(--navy);
   font-weight: 900;
+  border-radius: 50px;
 }
 
 .mobile-booking-bar a + a {
@@ -1429,14 +1435,31 @@ select {
     max-width: 100%;
   }
 
-  .hero-proof,
-  .hero-proof span {
-    width: 100%;
-    max-width: 100%;
+  .hero-proof {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 10px;
+    padding-bottom: 12px;
+    margin-right: -16px;
+    padding-right: 16px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .hero-proof::-webkit-scrollbar {
+    display: none;
   }
 
   .hero-proof span {
-    display: block;
+    flex: 0 0 auto;
+    width: auto;
+    max-width: none;
+    scroll-snap-align: start;
+    border-radius: 50px;
+    padding: 10px 20px;
+    white-space: nowrap;
   }
 
   .floating-card {
@@ -1450,8 +1473,6 @@ select {
     display: none;
   }
 
-  .trust-bar,
-  .service-grid,
   .blog-grid,
   .clinical-grid,
   .why-grid,
@@ -1459,6 +1480,47 @@ select {
   .treatment-detail,
   .site-footer {
     grid-template-columns: 1fr;
+  }
+
+  .trust-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+
+  .trust-bar .trust-item {
+    border-radius: var(--radius);
+    background: rgba(0, 180, 216, 0.04);
+    border: 1px solid rgba(0, 180, 216, 0.1);
+    padding: 20px 16px;
+  }
+  
+  .trust-bar .trust-item strong {
+    font-size: 1.1rem;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  .service-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    margin-inline: -16px;
+    padding-inline: 16px;
+    padding-bottom: 30px;
+    scrollbar-width: none;
+  }
+  
+  .service-grid::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .service-grid .service-card {
+    flex: 0 0 85%;
+    scroll-snap-align: center;
   }
 
   .timeline div {
@@ -1483,11 +1545,6 @@ select {
 
   .whatsapp-float {
     display: none;
-  }
-
-  .service-grid .service-card:first-child,
-  .service-grid .service-card:last-child {
-    grid-column: span 1;
   }
 
   .mobile-booking-bar {
