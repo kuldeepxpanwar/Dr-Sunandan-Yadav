@@ -1,5 +1,5 @@
 import HeroSection from "@/components/HeroSection";
-import ServicesBento from "@/components/ServicesBento";
+import ServicesBento from "@/components/services-bento";
 
 export default function Home() {
   return (
