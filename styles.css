@@ -1907,6 +1907,8 @@ select {
     -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
+    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 85%, transparent 100%);
   }
   
   .hero-proof > span {
@@ -1955,6 +1957,9 @@ select {
     padding-inline: 16px;
     padding-bottom: 24px;
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 85%, transparent 100%);
   }
 
   .clinical-grid::-webkit-scrollbar {
@@ -1996,6 +2001,9 @@ select {
     padding-inline: 16px;
     padding-bottom: 30px;
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 85%, transparent 100%);
   }
   
   .service-grid::-webkit-scrollbar {
@@ -2022,6 +2030,9 @@ select {
     gap: 12px;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 85%, transparent 100%);
   }
   
   .treatment-list::-webkit-scrollbar {
