@@ -1800,7 +1800,7 @@ select {
   }
 
   .hero-media {
-    justify-self: center;
+    align-self: center;
     max-width: 620px;
   }
 
@@ -1842,12 +1842,15 @@ select {
   .hero {
     min-height: auto;
     padding-top: 108px;
+    display: flex;
+    flex-direction: column-reverse;
   }
 
   .hero-copy {
     width: 334px;
     max-width: 100%;
     padding-right: 0;
+    margin-top: 24px;
   }
 
   .hero h1 {

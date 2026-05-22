@@ -189,3 +189,33 @@ const toggleDevModal = (show) => {
 devTrigger?.addEventListener("click", () => toggleDevModal(true));
 devCloseBtn?.addEventListener("click", () => toggleDevModal(false));
 devOverlay?.addEventListener("click", () => toggleDevModal(false));
+
+const countUpElements = document.querySelectorAll(".count-up");
+const countObserver = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.getAttribute("data-target"), 10);
+        let start = 1;
+        const duration = 2000;
+        const stepTime = Math.abs(Math.floor(duration / target));
+        
+        const timer = setInterval(() => {
+          start += target > 100 ? 47 : 1;
+          if (start > target) start = target;
+          el.textContent = start;
+          if (start === target) {
+            clearInterval(timer);
+          }
+        }, stepTime);
+        observer.unobserve(el);
+      }
+    });
+  },
+  { threshold: 0.5 }
+);
+
+countUpElements.forEach((el) => {
+  countObserver.observe(el);
+});
