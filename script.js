@@ -80,17 +80,32 @@ const observer = new IntersectionObserver(
 
 revealItems.forEach((item) => observer.observe(item));
 
-if (reviewsGrid && !reviewsGrid.querySelector(".reviews-track")) {
-  const track = document.createElement("div");
-  track.className = "reviews-track";
-  const cards = Array.from(reviewsGrid.children);
-  cards.forEach((card) => track.appendChild(card));
-  cards.forEach((card) => {
-    const clone = card.cloneNode(true);
-    clone.setAttribute("aria-hidden", "true");
-    track.appendChild(clone);
-  });
-  reviewsGrid.appendChild(track);
+if (reviewsGrid) {
+  let autoScrollInterval = setInterval(() => {
+    const firstCard = reviewsGrid.querySelector("article");
+    if (!firstCard) return;
+    
+    // Calculate scroll amount (card width + gap)
+    const cardWidth = firstCard.offsetWidth + 16; 
+    
+    // If reached the end, scroll back to start, else scroll next
+    if (reviewsGrid.scrollLeft + reviewsGrid.clientWidth >= reviewsGrid.scrollWidth - 10) {
+      reviewsGrid.scrollTo({ left: 0, behavior: "smooth" });
+    } else {
+      reviewsGrid.scrollBy({ left: cardWidth, behavior: "smooth" });
+    }
+  }, 3500);
+
+  const stopAutoScroll = () => {
+    if (autoScrollInterval) {
+      clearInterval(autoScrollInterval);
+      autoScrollInterval = null;
+    }
+  };
+
+  reviewsGrid.addEventListener("touchstart", stopAutoScroll, { passive: true });
+  reviewsGrid.addEventListener("mousedown", stopAutoScroll);
+  reviewsGrid.addEventListener("wheel", stopAutoScroll, { passive: true });
 }
 
 customSelects.forEach((select) => {
