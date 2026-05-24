@@ -2039,14 +2039,14 @@ select {
     display: none;
   }
 
-  .why-grid,
   .treatment-layout,
   .treatment-detail {
     grid-template-columns: 1fr;
   }
 
   .clinical-grid,
-  .blog-grid {
+  .blog-grid,
+  .why-grid {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -2059,12 +2059,14 @@ select {
   }
 
   .clinical-grid::-webkit-scrollbar,
-  .blog-grid::-webkit-scrollbar {
+  .blog-grid::-webkit-scrollbar,
+  .why-grid::-webkit-scrollbar {
     display: none;
   }
 
   .clinical-grid .clinical-card,
-  .blog-grid .blog-card {
+  .blog-grid .blog-card,
+  .why-grid .why-card {
     flex: 0 0 85%;
     scroll-snap-align: center;
   }
