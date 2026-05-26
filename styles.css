@@ -890,121 +890,135 @@ select {
   transform: none;
 }
 
-.review-summary,
-.review-card {
-  flex: 0 0 350px;
-  scroll-snap-align: center;
-  border: 1px solid #edf2f7;
-  border-radius: 24px;
+/* ===== GOOGLE REVIEWS SECTION ===== */
+.google-rating-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
   background: var(--white);
-  box-shadow: 0 24px 60px rgba(10, 61, 98, 0.09);
-  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  padding: 16px 32px;
+  border-radius: 100px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  border: 1px solid #edf2f7;
 }
 
-.review-card:hover,
-.review-summary:hover {
-  transform: translateY(-8px) scale(1.03);
-  border-color: rgba(0, 180, 216, 0.24);
-  box-shadow: 0 34px 90px rgba(10, 61, 98, 0.16);
-}
-
-.review-summary {
+.rating-details {
   display: flex;
-  min-height: 300px;
   flex-direction: column;
-  justify-content: end;
-  padding: 28px;
-  color: var(--white);
-  background: linear-gradient(135deg, var(--navy), #08789a);
+  align-items: flex-start;
+}
+
+.rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .rating-number {
-  font-size: clamp(58px, 7vw, 86px);
+  font-size: 1.5rem;
   font-weight: 800;
-  line-height: 0.9;
+  color: var(--navy);
+  line-height: 1;
 }
 
-.stars {
-  color: #f5b301;
-  font-size: 19px;
-  letter-spacing: 0;
-  text-shadow: 0 0 12px rgba(245, 179, 1, 0.45);
-}
-
-.review-summary .stars {
-  margin: 10px 0 18px;
-}
-
-.review-summary strong {
-  font-size: 22px;
-}
-
-.review-summary p {
-  margin: 10px 0 0;
-  color: rgba(255, 255, 255, 0.78);
+.rating-text {
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 500;
+  margin-top: 4px;
 }
 
 .review-card {
-  display: flex;
-  min-height: 300px;
-  flex-direction: column;
+  width: 380px;
+  background: var(--white);
+  border-radius: 24px;
   padding: 32px;
-}
-
-.review-card.featured {
-  grid-column: span 1;
-  background: #fbfdfe;
-}
-
-.review-topline {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  border: 1px solid #edf2f7;
   display: flex;
-  gap: 12px;
-  align-items: center;
-  margin-bottom: 14px;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  scroll-snap-align: center;
 }
 
-.avatar {
-  display: grid;
-  width: 42px;
-  height: 42px;
-  flex: 0 0 auto;
-  place-items: center;
-  color: var(--white);
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--navy), var(--cyan));
-  font-weight: 800;
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
 }
 
-.review-topline strong,
-.review-topline small {
-  display: block;
+.review-stars {
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
 }
 
-.review-topline strong {
-  color: var(--navy);
-  line-height: 1.15;
-}
-
-.review-topline small {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.review-card p {
+.review-text {
+  font-size: 1rem;
+  color: var(--ink);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  flex-grow: 1;
+  font-style: italic;
+  
   display: -webkit-box;
   overflow: hidden;
-  margin: 14px 0 0;
-  color: var(--ink);
-  font-size: 16px;
-  line-height: 1.62;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 5;
 }
 
-@media (min-width: 761px) {
-  .review-summary,
+.reviewer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-top: 1px solid #edf2f7;
+  padding-top: 16px;
+}
+
+.reviewer-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy), var(--cyan));
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.reviewer-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.reviewer-name {
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+}
+
+.reviewer-badge {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .google-rating-box {
+    flex-direction: column;
+    padding: 16px;
+    gap: 12px;
+    text-align: center;
+  }
+  .rating-details {
+    align-items: center;
+  }
   .review-card {
-    flex-basis: 450px;
+    width: 320px;
+    padding: 24px;
   }
 }
 
