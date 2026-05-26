@@ -769,6 +769,33 @@ select {
   border-radius: var(--radius);
 }
 
+.treatment-detail .crossfade-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.16;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.treatment-detail .crossfade-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.treatment-detail .crossfade-container .crossfade-img {
+  animation: crossfadeAnim 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes crossfadeAnim {
+  0%, 35% { opacity: 0; }
+  50%, 85% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 .treatment-detail ul {
   padding-left: 20px;
   color: var(--ink);

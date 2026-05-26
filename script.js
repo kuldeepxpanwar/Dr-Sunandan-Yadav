@@ -32,7 +32,7 @@ const treatmentContent = {
     points: ["Minimally invasive expertise", "Lower tissue trauma goals", "Clear pre-operative counselling"],
   },
   andrology: {
-    image: "mens-health-awareness.webp",
+    image: ["andrology-doctorimage.webp", "andrology-image.webp"],
     title: "Confidential andrology consultation",
     body:
       "Sensitive men's health concerns are handled with privacy, diagnostic clarity, and practical treatment choices.",
@@ -149,8 +149,20 @@ treatmentTabs.forEach((tab) => {
 
     treatmentPanel.classList.add("is-swapping");
     window.setTimeout(() => {
+      let imageHtml = '';
+      if (Array.isArray(content.image)) {
+        imageHtml = `
+          <div class="crossfade-container">
+            <img src="${content.image[0]}" alt="${content.title}" class="base-img" />
+            <img src="${content.image[1]}" alt="${content.title}" class="crossfade-img" />
+          </div>
+        `;
+      } else {
+        imageHtml = `<img src="${content.image}" alt="${content.title}" />`;
+      }
+
       treatmentPanel.innerHTML = `
-        <img src="${content.image}" alt="${content.title}" />
+        ${imageHtml}
         <div>
           <h3>${content.title}</h3>
           <p>${content.body}</p>
