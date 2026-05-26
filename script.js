@@ -278,3 +278,24 @@ Please let me know the available time slots.`;
     }
   });
 }
+
+// Blog Slider Navigation
+const blogGrid = document.getElementById("blogGrid");
+const prevBtn = document.querySelector(".prev-btn");
+const nextBtn = document.querySelector(".next-btn");
+
+if (blogGrid && prevBtn && nextBtn) {
+  const getScrollAmount = () => {
+    const card = blogGrid.querySelector(".blog-card");
+    // scroll by one card width + gap
+    return card ? card.offsetWidth + 24 : 350; 
+  };
+
+  prevBtn.addEventListener("click", () => {
+    blogGrid.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
+  });
+
+  nextBtn.addEventListener("click", () => {
+    blogGrid.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
+  });
+}

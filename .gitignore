@@ -11,7 +11,7 @@ asset-contact-sheet.jpg
 *.jpeg
 /*.webp
 !/public/*.webp
-
+!awareness-hub/*
 # Next.js build output
 .next/
 

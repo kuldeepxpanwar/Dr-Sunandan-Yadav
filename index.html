@@ -401,11 +401,21 @@
       </section>
 
       <section class="section blog-section" id="blog">
-        <div class="section-heading reveal">
-          <span>Awareness hub</span>
-          <h2>Useful reading for patients before and after consultation.</h2>
+        <div class="section-heading reveal slider-header">
+          <div>
+            <span>Awareness hub</span>
+            <h2>Useful reading for patients before and after consultation.</h2>
+          </div>
+          <div class="slider-controls">
+            <button class="slider-btn prev-btn" aria-label="Previous articles">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <button class="slider-btn next-btn" aria-label="Next articles">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
         </div>
-        <div class="blog-grid">
+        <div class="blog-grid" id="blogGrid">
           <article class="blog-card reveal">
             <img src="kidney-disease-prevention.webp" alt="Kidney disease prevention awareness graphic" />
             <div>
