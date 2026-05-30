@@ -11,6 +11,8 @@
   --white: #ffffff;
   --shadow: 0 22px 55px rgba(10, 61, 98, 0.14);
   --radius: 8px;
+  --font-heading: "Outfit", sans-serif;
+  --font-body: "Inter", Arial, sans-serif;
   color-scheme: light;
 }
 
@@ -25,11 +27,17 @@ html {
 
 body {
   margin: 0;
-  font-family: "Inter", Arial, sans-serif;
+  font-family: var(--font-body);
   color: var(--ink);
   background: var(--white);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, 
+.hero-title, .stat-number, .brand span {
+  font-family: var(--font-heading);
 }
 
 img {
