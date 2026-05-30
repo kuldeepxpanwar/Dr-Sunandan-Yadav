@@ -311,3 +311,38 @@ if (blogGrid && prevBtn && nextBtn) {
     blogGrid.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
   });
 }
+
+// Universal Native Carousel Pagination Logic
+document.addEventListener("DOMContentLoaded", () => {
+  const carousels = document.querySelectorAll('[data-carousel-container]');
+  
+  carousels.forEach(carouselWrapper => {
+    const grid = carouselWrapper.querySelector('.scroll-grid');
+    const indicatorsWrap = carouselWrapper.querySelector('.native-carousel-indicators');
+    
+    if (grid && indicatorsWrap) {
+      // Find all cards inside this specific grid
+      const cards = grid.children;
+      const indicators = indicatorsWrap.querySelectorAll('.indicator');
+      
+      if (cards.length > 0 && indicators.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const index = Array.from(cards).indexOf(entry.target);
+              if (index !== -1 && indicators[index]) {
+                indicators.forEach(ind => ind.classList.remove('active'));
+                indicators[index].classList.add('active');
+              }
+            }
+          });
+        }, {
+          root: grid,
+          threshold: 0.5
+        });
+
+        Array.from(cards).forEach(card => observer.observe(card));
+      }
+    }
+  });
+});

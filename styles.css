@@ -2310,3 +2310,29 @@ select {
     animation: none;
   }
 }
+
+/* ===== NATIVE CAROUSEL INDICATORS ===== */
+.native-carousel-indicators {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 24px;
+  flex-wrap: wrap; /* In case of many dots */
+}
+@media (max-width: 768px) {
+  .native-carousel-indicators {
+    display: flex;
+  }
+}
+.native-carousel-indicators .indicator {
+  width: 12px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+.native-carousel-indicators .indicator.active {
+  width: 24px;
+  background: var(--primary, #0ea5e9);
+}
