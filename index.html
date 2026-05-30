@@ -189,26 +189,65 @@
           <h2>Procedure clarity before the patient enters the OT.</h2>
         </div>
         <div class="treatment-layout">
-          <div class="treatment-list reveal">
+          <div class="treatment-list desktop-only reveal">
             <button class="treatment-tab active" type="button" data-treatment="stone">Kidney stone care</button>
             <button class="treatment-tab" type="button" data-treatment="prostate">Prostate care</button>
             <button class="treatment-tab" type="button" data-treatment="robotic">Robotic & laparoscopy</button>
             <button class="treatment-tab" type="button" data-treatment="andrology">Andrology</button>
           </div>
-          <article class="treatment-detail reveal" data-treatment-panel>
-            <img src="laparoscopic-surgery-ot.webp" alt="Laparoscopic urology procedure in operation theatre" />
-            <div>
-              <h3>Laser and minimally invasive treatment options</h3>
-              <p>
-                Patients are guided through symptoms, scans, treatment choices, expected recovery, and follow-up prevention so care feels less uncertain.
-              </p>
-              <ul>
-                <li>Technology-led planning</li>
-                <li>Recovery-focused surgical approach</li>
-                <li>Transparent consultation and follow-up</li>
-              </ul>
-            </div>
-          </article>
+          <div class="treatment-carousel scroll-grid reveal">
+            <article class="treatment-detail active" id="tab-stone">
+              <img src="laparoscopic-surgery-ot.webp" alt="Laparoscopic urology procedure in operation theatre" />
+              <div>
+                <h3>Laser and minimally invasive treatment options</h3>
+                <p>Patients are guided through symptoms, scans, treatment choices, expected recovery, and follow-up prevention so care feels less uncertain.</p>
+                <ul>
+                  <li>Technology-led planning</li>
+                  <li>Recovery-focused surgical approach</li>
+                  <li>Transparent consultation and follow-up</li>
+                </ul>
+              </div>
+            </article>
+            <article class="treatment-detail" id="tab-prostate">
+              <img src="prostate-care-doctor.webp" alt="Prostate care planned around urinary comfort" />
+              <div>
+                <h3>Prostate care planned around urinary comfort</h3>
+                <p>Evaluation covers frequency, weak stream, incomplete emptying, prostate size, medicines, and surgical pathways when needed.</p>
+                <ul>
+                  <li>Symptom-first evaluation</li>
+                  <li>TURP and laser options</li>
+                  <li>Follow-up for long-term urinary health</li>
+                </ul>
+              </div>
+            </article>
+            <article class="treatment-detail" id="tab-robotic">
+              <img src="3d-laparoscopy-surgery.webp" alt="Robotic and laparoscopic procedure guidance" />
+              <div>
+                <h3>Robotic and laparoscopic procedure guidance</h3>
+                <p>Advanced surgical planning is presented in simple steps, from indication and hospital stay to expected recovery milestones.</p>
+                <ul>
+                  <li>Minimally invasive expertise</li>
+                  <li>Lower tissue trauma goals</li>
+                  <li>Clear pre-operative counselling</li>
+                </ul>
+              </div>
+            </article>
+            <article class="treatment-detail" id="tab-andrology">
+              <div class="crossfade-container">
+                <img src="andrology-doctorimage.webp" alt="Confidential andrology consultation" class="base-img" />
+                <img src="andrology-image.webp" alt="Confidential andrology consultation" class="crossfade-img" />
+              </div>
+              <div>
+                <h3>Confidential andrology consultation</h3>
+                <p>Sensitive men's health concerns are handled with privacy, diagnostic clarity, and practical treatment choices.</p>
+                <ul>
+                  <li>Erectile dysfunction care</li>
+                  <li>Male infertility guidance</li>
+                  <li>Private, respectful consultation</li>
+                </ul>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 

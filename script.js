@@ -9,37 +9,6 @@ const formNote = document.querySelector("[data-form-note]");
 const customSelects = document.querySelectorAll("[data-custom-select]");
 const reviewsGrid = document.querySelector(".reviews-grid");
 
-const treatmentContent = {
-  stone: {
-    image: "laparoscopic-surgery-ot.webp",
-    title: "Laser and minimally invasive treatment options",
-    body:
-      "Patients are guided through symptoms, scans, treatment choices, expected recovery, and follow-up prevention so care feels less uncertain.",
-    points: ["Technology-led planning", "Recovery-focused surgical approach", "Transparent consultation and follow-up"],
-  },
-  prostate: {
-    image: "prostate-care-doctor.webp",
-    title: "Prostate care planned around urinary comfort",
-    body:
-      "Evaluation covers frequency, weak stream, incomplete emptying, prostate size, medicines, and surgical pathways when needed.",
-    points: ["Symptom-first evaluation", "TURP and laser options", "Follow-up for long-term urinary health"],
-  },
-  robotic: {
-    image: "3d-laparoscopy-surgery.webp",
-    title: "Robotic and laparoscopic procedure guidance",
-    body:
-      "Advanced surgical planning is presented in simple steps, from indication and hospital stay to expected recovery milestones.",
-    points: ["Minimally invasive expertise", "Lower tissue trauma goals", "Clear pre-operative counselling"],
-  },
-  andrology: {
-    image: ["andrology-doctorimage.webp", "andrology-image.webp"],
-    title: "Confidential andrology consultation",
-    body:
-      "Sensitive men's health concerns are handled with privacy, diagnostic clarity, and practical treatment choices.",
-    points: ["Erectile dysfunction care", "Male infertility guidance", "Private, respectful consultation"],
-  },
-};
-
 const heroImage = document.querySelector(".hero-media img");
 
 const handleScroll = () => {
@@ -141,38 +110,26 @@ document.addEventListener("click", (event) => {
 
 treatmentTabs.forEach((tab) => {
   tab.addEventListener("click", () => {
-    const content = treatmentContent[tab.dataset.treatment];
-    if (!content || !treatmentPanel) return;
+    const targetId = tab.dataset.treatment;
+    const targetCard = document.getElementById("tab-" + targetId);
+    if (!targetCard) return;
 
     treatmentTabs.forEach((item) => item.classList.remove("active"));
     tab.classList.add("active");
 
-    treatmentPanel.classList.add("is-swapping");
+    const allCards = document.querySelectorAll(".treatment-detail");
+    allCards.forEach(card => {
+      card.classList.remove("active");
+      card.classList.remove("is-swapping");
+    });
+    
+    // Add swap animation
+    targetCard.classList.add("is-swapping");
+    targetCard.classList.add("active");
+    
     window.setTimeout(() => {
-      let imageHtml = '';
-      if (Array.isArray(content.image)) {
-        imageHtml = `
-          <div class="crossfade-container">
-            <img src="${content.image[0]}" alt="${content.title}" class="base-img" />
-            <img src="${content.image[1]}" alt="${content.title}" class="crossfade-img" />
-          </div>
-        `;
-      } else {
-        imageHtml = `<img src="${content.image}" alt="${content.title}" />`;
-      }
-
-      treatmentPanel.innerHTML = `
-        ${imageHtml}
-        <div>
-          <h3>${content.title}</h3>
-          <p>${content.body}</p>
-          <ul>
-            ${content.points.map((point) => `<li>${point}</li>`).join("")}
-          </ul>
-        </div>
-      `;
-      treatmentPanel.classList.remove("is-swapping");
-    }, 170);
+      targetCard.classList.remove("is-swapping");
+    }, 50);
   });
 });
 
@@ -348,7 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Dynamic Pagination Dots for Mobile Scroll-Snap Grids
-const paginationGrids = document.querySelectorAll(".service-grid, .reviews-grid, .blog-grid, .clinical-grid, .why-grid");
+const paginationGrids = document.querySelectorAll(".service-grid, .reviews-grid, .blog-grid, .clinical-grid, .why-grid, .treatment-carousel");
 
 paginationGrids.forEach(grid => {
   const cards = Array.from(grid.children);
