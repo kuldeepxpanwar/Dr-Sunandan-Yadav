@@ -388,3 +388,9 @@ paginationGrids.forEach(grid => {
 
   cards.forEach(card => dotObserver.observe(card));
 });
+
+// Dynamic Copyright Year
+const currentYearSpan = document.getElementById("current-year");
+if (currentYearSpan) {
+  currentYearSpan.textContent = new Date().getFullYear();
+}

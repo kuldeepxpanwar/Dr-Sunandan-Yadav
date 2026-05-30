@@ -2367,3 +2367,19 @@ select {
     background: var(--primary);
   }
 }
+
+/* Footer Copyright */
+.footer-copyright {
+  width: 100%;
+  text-align: center;
+  margin-top: 16px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+}
+
+.footer-copyright p {
+  margin: 0;
+  opacity: 0.8;
+}
