@@ -346,3 +346,45 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+// Dynamic Pagination Dots for Mobile Scroll-Snap Grids
+const paginationGrids = document.querySelectorAll(".service-grid, .reviews-grid, .blog-grid, .clinical-grid, .why-grid");
+
+paginationGrids.forEach(grid => {
+  const cards = Array.from(grid.children);
+  if (cards.length <= 1) return;
+
+  const dotsContainer = document.createElement("div");
+  dotsContainer.className = "pagination-dots";
+  dotsContainer.setAttribute("aria-hidden", "true");
+  
+  cards.forEach((card, index) => {
+    const dot = document.createElement("span");
+    dot.className = index === 0 ? "dot active" : "dot";
+    dot.addEventListener("click", () => {
+      card.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    });
+    dotsContainer.appendChild(dot);
+  });
+
+  // Insert after the grid
+  grid.parentNode.insertBefore(dotsContainer, grid.nextSibling);
+
+  const dotObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const index = cards.indexOf(entry.target);
+        if (index !== -1) {
+          Array.from(dotsContainer.children).forEach((dot, i) => {
+            dot.classList.toggle("active", i === index);
+          });
+        }
+      }
+    });
+  }, {
+    root: grid,
+    threshold: 0.6
+  });
+
+  cards.forEach(card => dotObserver.observe(card));
+});

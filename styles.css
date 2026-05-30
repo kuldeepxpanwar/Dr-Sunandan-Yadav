@@ -2336,3 +2336,34 @@ select {
   width: 24px;
   background: var(--primary, #0ea5e9);
 }
+
+/* Pagination Dots Styles */
+.pagination-dots {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .pagination-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+    margin-bottom: 24px;
+    width: 100%;
+  }
+
+  .pagination-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #cbd5e1; /* Slightly darker than line for better visibility */
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .pagination-dots .dot.active {
+    width: 24px;
+    border-radius: 4px;
+    background: var(--primary);
+  }
+}
