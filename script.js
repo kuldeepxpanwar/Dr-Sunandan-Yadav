@@ -354,8 +354,7 @@ if (currentYearSpan) {
 
 // RIRS Image Slideshow Auto-Rotation
 document.addEventListener('DOMContentLoaded', () => {
-  const rirsSlides = document.querySelectorAll('.rirs-slideshow img');
-  const rirsDots = document.querySelectorAll('.rirs-dots span');
+  const rirsSlides = document.querySelectorAll('.rirs-frame-slideshow img');
   
   if (rirsSlides.length > 0) {
     let currentSlide = 0;
@@ -363,14 +362,12 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(() => {
       // Remove active from current
       rirsSlides[currentSlide].classList.remove('active');
-      rirsDots[currentSlide].classList.remove('active');
       
       // Move to next
       currentSlide = (currentSlide + 1) % rirsSlides.length;
       
       // Add active to new
       rirsSlides[currentSlide].classList.add('active');
-      rirsDots[currentSlide].classList.add('active');
     }, 4000); // 4 seconds
   }
 });
