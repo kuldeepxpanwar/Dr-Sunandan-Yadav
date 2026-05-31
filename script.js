@@ -354,7 +354,7 @@ if (currentYearSpan) {
 
 // RIRS Image Slideshow Auto-Rotation
 document.addEventListener('DOMContentLoaded', () => {
-  const rirsSlides = document.querySelectorAll('.rirs-frame-slideshow img');
+  const rirsSlides = document.querySelectorAll('.rirs-slider img');
   
   if (rirsSlides.length > 0) {
     let currentSlide = 0;

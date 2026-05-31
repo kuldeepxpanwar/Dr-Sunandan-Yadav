@@ -2449,41 +2449,17 @@ select {
 
 
 
-.rirs-frame-wrapper {
-  position: relative;
-  width: 100%;
-  display: flex;
-}
 
-.rirs-base-frame {
-  width: 100%;
-  height: auto;
-  display: block;
-}
 
-.rirs-frame-slideshow {
-  position: absolute;
-  /* Estimated values to fit the empty box in the frame */
-  top: 9%;
-  left: 47.5%;
-  width: 48.5%;
-  height: 82%;
-  overflow: hidden;
-  border-radius: 6%;
-}
 
-.rirs-frame-slideshow img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+
+
+
+
+.rirs-slider img {
   opacity: 0;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 1.5s ease-in-out;
 }
-
-.rirs-frame-slideshow img.active {
+.rirs-slider img.active {
   opacity: 1;
 }
-
