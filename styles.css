@@ -2463,3 +2463,24 @@ select {
 .rirs-slider img.active {
   opacity: 1;
 }
+
+/* Mobile Category Tag */
+.mobile-category-tag {
+  display: none; /* Hidden on desktop by default */
+}
+
+@media (max-width: 768px) {
+  .mobile-category-tag {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--cyan);
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+    background: rgba(0, 168, 204, 0.1);
+    padding: 6px 12px;
+    border-radius: 4px;
+    border-left: 3px solid var(--cyan);
+  }
+}
