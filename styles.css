@@ -2448,14 +2448,6 @@ select {
 
 
 
-/* RIRS Image Overlay Mode */
-article.rirs-overlay-mode {
-  padding: 0;
-  display: block !important;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}
 
 .rirs-frame-wrapper {
   position: relative;
@@ -2494,3 +2486,4 @@ article.rirs-overlay-mode {
 .rirs-frame-slideshow img.active {
   opacity: 1;
 }
+
