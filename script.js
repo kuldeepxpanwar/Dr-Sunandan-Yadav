@@ -371,3 +371,63 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4000); // 4 seconds
   }
 });
+
+// --- Google Sheets Live Availability Fetcher ---
+const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1iOGCOvDEEu8s1bq4MOXMyR1DqxqAz-OMaQYCmkPn_eM/export?format=csv";
+
+async function fetchDoctorAvailability() {
+  const banner = document.getElementById("live-status-banner");
+  const msgEl = document.getElementById("live-status-message");
+  
+  // Do not fetch if the URL hasn't been updated by the admin yet
+  if (!banner || !msgEl || GOOGLE_SHEET_CSV_URL.includes("YOUR_PUBLISHED_CSV")) {
+    console.log("Live status banner: Waiting for CSV URL configuration.");
+    return;
+  }
+
+  try {
+    // Fetch data with cache buster so browser always gets the latest sheet edit
+    const response = await fetch(`${GOOGLE_SHEET_CSV_URL}&t=${Date.now()}`);
+    if (!response.ok) throw new Error("Sheet fetch failed");
+    
+    const csvText = await response.text();
+    
+    // Parse CSV rows simple & robust (handling quotes and commas)
+    const rows = csvText.split(/\r?\n/).map(row => {
+      // Splits by commas that are outside quotes
+      return row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(cell => cell.replace(/^"|"$/g, '').trim());
+    });
+
+    if (rows.length < 2) return; // Header only or empty
+
+    // Column A is Status (Index 0), Column B is Message (Index 1)
+    const statusVal = rows[1][0] ? rows[1][0].toLowerCase() : "closed";
+    const messageVal = rows[1][1] || "Doctor is not available at the clinic.";
+
+    // Apply corresponding CSS classes based on status
+    banner.className = "live-status-banner"; // reset class list
+    
+    if (statusVal === "open") {
+      banner.classList.add("status-open");
+    } else if (statusVal === "break") {
+      banner.classList.add("status-break");
+    } else if (statusVal === "leave") {
+      banner.classList.add("status-leave");
+    } else {
+      banner.classList.add("status-closed");
+    }
+
+    // Set the dynamic text message
+    msgEl.textContent = messageVal;
+    
+    // Display the banner smoothly
+    banner.style.display = "block";
+    
+  } catch (error) {
+    console.error("Availability error:", error);
+    banner.style.display = "none"; // Hide gracefully on error
+  }
+}
+
+// Call on document ready
+document.addEventListener("DOMContentLoaded", fetchDoctorAvailability);

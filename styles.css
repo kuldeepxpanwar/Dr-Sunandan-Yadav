@@ -56,6 +56,130 @@ select {
   font: inherit;
 }
 
+/* --- Live Doctor Availability Banner --- */
+.live-status-banner {
+  width: 100%;
+  padding: 10px 20px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 99;
+  position: relative;
+}
+
+/* Green Status Theme */
+.live-status-banner.status-open {
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.05) 100%);
+  border-bottom-color: rgba(16, 185, 129, 0.25);
+}
+.live-status-banner.status-open .live-dot {
+  background-color: #10b981;
+  box-shadow: 0 0 10px #10b981;
+}
+.live-status-banner.status-open .live-badge {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+}
+.live-status-banner.status-open .live-message {
+  color: #065f46;
+}
+
+/* Orange Break Theme */
+.live-status-banner.status-break {
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.15) 0%, rgba(217, 119, 6, 0.05) 100%);
+  border-bottom-color: rgba(245, 158, 11, 0.25);
+}
+.live-status-banner.status-break .live-dot {
+  background-color: #f59e0b;
+  box-shadow: 0 0 10px #f59e0b;
+}
+.live-status-banner.status-break .live-badge {
+  background-color: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+}
+.live-status-banner.status-break .live-message {
+  color: #92400e;
+}
+
+/* Red Closed / Leave Theme */
+.live-status-banner.status-closed,
+.live-status-banner.status-leave {
+  background: linear-gradient(90deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.05) 100%);
+  border-bottom-color: rgba(239, 68, 68, 0.25);
+}
+.live-status-banner.status-closed .live-dot,
+.live-status-banner.status-leave .live-dot {
+  background-color: #ef4444;
+  box-shadow: 0 0 10px #ef4444;
+}
+.live-status-banner.status-closed .live-badge,
+.live-status-banner.status-leave .live-badge {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+.live-status-banner.status-closed .live-message,
+.live-status-banner.status-leave .live-message {
+  color: #991b1b;
+}
+
+.live-status-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse 1.8s infinite ease-in-out;
+}
+
+.live-message-wrapper {
+  flex: 1;
+  overflow: hidden;
+}
+
+.live-message {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.4;
+  display: block;
+}
+
+/* Pulsing dot animation */
+@keyframes pulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.6; }
+}
+
+@media (max-width: 768px) {
+  .live-status-banner {
+    padding: 8px 16px;
+  }
+  .live-message {
+    font-size: 12px;
+  }
+}
+
 .site-header {
   position: fixed;
   z-index: 50;
