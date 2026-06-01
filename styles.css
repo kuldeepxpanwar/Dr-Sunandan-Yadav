@@ -59,7 +59,7 @@ select {
 /* --- Live Doctor Availability Banner --- */
 .live-status-banner {
   position: absolute;
-  top: 16px;
+  top: 90px;
   left: 5%;
   right: 5%;
   width: auto;
