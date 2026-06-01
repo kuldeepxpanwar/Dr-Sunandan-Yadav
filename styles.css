@@ -58,14 +58,20 @@ select {
 
 /* --- Live Doctor Availability Banner --- */
 .live-status-banner {
-  width: 100%;
+  position: absolute;
+  top: 16px;
+  left: 5%;
+  right: 5%;
+  width: auto;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 10px 20px;
+  border-radius: 12px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 99;
-  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 10;
 }
 
 /* Green Status Theme */
@@ -1921,6 +1927,40 @@ select {
 }
 
 /* --- FAB Speed Dial Menu (Desktop Only) --- */
+/* Secondary Live Badge in Mobile Booking Bar */
+.booking-live-badge {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 5px;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 20px;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.booking-live-badge .live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse 1.8s infinite ease-in-out;
+}
+.booking-live-badge.status-open { color: #065f46; background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.25); }
+.booking-live-badge.status-open .live-dot { background-color: #10b981; box-shadow: 0 0 6px #10b981; }
+
+.booking-live-badge.status-break { color: #92400e; background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.25); }
+.booking-live-badge.status-break .live-dot { background-color: #f59e0b; box-shadow: 0 0 6px #f59e0b; }
+
+.booking-live-badge.status-closed, .booking-live-badge.status-leave { color: #991b1b; background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.25); }
+.booking-live-badge.status-closed .live-dot, .booking-live-badge.status-leave .live-dot { background-color: #ef4444; box-shadow: 0 0 6px #ef4444; }
+
 .fab-container {
   position: fixed;
   z-index: 55;

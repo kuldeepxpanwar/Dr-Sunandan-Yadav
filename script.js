@@ -379,53 +379,59 @@ async function fetchDoctorAvailability() {
   const banner = document.getElementById("live-status-banner");
   const msgEl = document.getElementById("live-status-message");
   
-  // Do not fetch if the URL hasn't been updated by the admin yet
+  const bookingBadge = document.getElementById("booking-live-badge");
+  const bookingMsgEl = document.getElementById("booking-live-text");
+  
   if (!banner || !msgEl || GOOGLE_SHEET_CSV_URL.includes("YOUR_PUBLISHED_CSV")) {
     console.log("Live status banner: Waiting for CSV URL configuration.");
     return;
   }
 
   try {
-    // Fetch data with cache buster so browser always gets the latest sheet edit
     const response = await fetch(`${GOOGLE_SHEET_CSV_URL}&t=${Date.now()}`);
     if (!response.ok) throw new Error("Sheet fetch failed");
     
     const csvText = await response.text();
     
-    // Parse CSV rows simple & robust (handling quotes and commas)
     const rows = csvText.split(/\r?\n/).map(row => {
-      // Splits by commas that are outside quotes
       return row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(cell => cell.replace(/^"|"$/g, '').trim());
     });
 
-    if (rows.length < 2) return; // Header only or empty
+    if (rows.length < 2) return;
 
-    // Column A is Status (Index 0), Column B is Message (Index 1)
     const statusVal = rows[1][0] ? rows[1][0].toLowerCase() : "closed";
     const messageVal = rows[1][1] || "Doctor is not available at the clinic.";
 
-    // Apply corresponding CSS classes based on status
-    banner.className = "live-status-banner"; // reset class list
-    
-    if (statusVal === "open") {
-      banner.classList.add("status-open");
-    } else if (statusVal === "break") {
-      banner.classList.add("status-break");
-    } else if (statusVal === "leave") {
-      banner.classList.add("status-leave");
-    } else {
-      banner.classList.add("status-closed");
-    }
+    // Helper for applying classes
+    const setStatusClass = (element, baseClass, status) => {
+      if(!element) return;
+      element.className = baseClass;
+      if (status === "open") element.classList.add("status-open");
+      else if (status === "break") element.classList.add("status-break");
+      else if (status === "leave") element.classList.add("status-leave");
+      else element.classList.add("status-closed");
+    };
 
-    // Set the dynamic text message
+    // Update Primary Banner
+    setStatusClass(banner, "live-status-banner", statusVal);
     msgEl.textContent = messageVal;
-    
-    // Display the banner smoothly
     banner.style.display = "block";
+    
+    // Update Secondary Booking Badge
+    if (bookingBadge && bookingMsgEl) {
+      setStatusClass(bookingBadge, "booking-live-badge", statusVal);
+      // For the small badge, keep the message shorter based on status
+      if (statusVal === "open") bookingMsgEl.textContent = "Available Now";
+      else if (statusVal === "break") bookingMsgEl.textContent = "On Break";
+      else bookingMsgEl.textContent = "Unavailable";
+      
+      bookingBadge.style.display = "flex";
+    }
     
   } catch (error) {
     console.error("Availability error:", error);
-    banner.style.display = "none"; // Hide gracefully on error
+    banner.style.display = "none";
+    if (bookingBadge) bookingBadge.style.display = "none";
   }
 }
 
