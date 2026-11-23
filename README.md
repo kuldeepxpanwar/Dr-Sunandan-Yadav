@@ -114,8 +114,6 @@ Dr-Sunandan-Yadav/
     ├── kidney-disease-prevention.webp
     ├── kidney-cancer-symptoms.webp
     ├── foods-to-avoid-kidney-stones.webp
-    ├── rirs-images-slideshow.webp
-    ├── rirs-images-slideshoww.webp
     ├── rirs-rotate-one.webp
     ├── rirs-rotate-two.webp
     └── rirs-rotate-third.webp
